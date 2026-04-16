@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a701a0ed8be4f169370dc146ef0ce9d" Name="Diagram1">
+        <EntityTypeShape EntityType="JarBirdModel.Korzina" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.Orders" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.Products" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.ProductTypes" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.Roles" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.Statuses" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JarBirdModel.Users" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="JarBirdModel.FK_Korzina_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Korzina_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Orders_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Orders_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Orders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Products_ProductTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="JarBirdModel.FK_Users_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
