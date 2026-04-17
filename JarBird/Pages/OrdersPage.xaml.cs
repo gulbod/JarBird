@@ -20,6 +20,9 @@ namespace JarBird.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр страницы заказов
+        /// </summary>
         public OrdersPage()
         {
             InitializeComponent();

@@ -33,6 +33,11 @@ namespace JarBird.Pages
             IDProductTypeComboBox.ItemsSource = Core.Context.ProductTypes.ToList();
             Core.Context.Products.Add(CurrentProduct);
         }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр страницы для редактирования существующего продукта
+        /// </summary>
+        /// <param name="Product">Продукт для редактирования</param>
         public AddProductsType(Products Product)
         {
             InitializeComponent();
@@ -42,6 +47,10 @@ namespace JarBird.Pages
             LoadProduct();
         }
 
+
+        /// <summary>
+        /// Загружает данные выбранного продукта в элементы управления формы
+        /// </summary>
         private void LoadProduct() 
         {
             IDProductTextBlock.Text = Convert.ToString(CurrentProduct.IDProduct);
@@ -99,6 +108,10 @@ namespace JarBird.Pages
             NavigationService.Navigate(new ProductsPage());
         }
 
+        /// <summary>
+        /// Выполняет проверку корректности введенных данных
+        /// </summary>
+        /// <returns>Возвращает true, если обнаружены ошибки валидации, иначе false</returns>
         private bool ValidationData()
         {
             string errorMessage = "";

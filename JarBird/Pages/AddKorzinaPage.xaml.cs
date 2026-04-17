@@ -23,6 +23,11 @@ namespace JarBird.Pages
         public Products CurrentProduct { get; set; }
 
         Korzina CurrentOrder = new Korzina();
+
+        /// <summary>
+        /// Инициализирует новый экземпляр страницы для добавления продукта в корзину
+        /// </summary>
+        /// <param name="Product">Продукт для добавления в корзину</param>
         public AddKorzinaPage(Products Product)
         {
             InitializeComponent();

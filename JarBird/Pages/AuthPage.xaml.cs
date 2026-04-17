@@ -20,6 +20,9 @@ namespace JarBird.Pages
     /// </summary>
     public partial class AuthPage : Page
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр страницы авторизации
+        /// </summary>
         public AuthPage()
         {
             InitializeComponent();

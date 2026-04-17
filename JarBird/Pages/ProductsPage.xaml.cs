@@ -79,6 +79,9 @@ namespace JarBird.Pages
             Filter();
         }
 
+        /// <summary>
+        /// Выполняет фильтрацию, поиск и сортировку списка продуктов на основе выбранных пользователем параметров
+        /// </summary>
         private void Filter()
         {
             try

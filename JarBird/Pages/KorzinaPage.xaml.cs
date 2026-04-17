@@ -23,6 +23,9 @@ namespace JarBird.Pages
             LoadMyOrders();
         }
 
+        /// <summary>
+        /// Загружает список товаров в корзине для текущего авторизованного пользователя
+        /// </summary>
         public void LoadMyOrders()
         {
             var filteredOrders = Core.Context.Korzina.ToList();

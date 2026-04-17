@@ -40,6 +40,10 @@ namespace JarBird.Pages
             Core.Context.Orders.Add(CurrentOrder);
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр страницы для редактирования существующего заказа
+        /// </summary>
+        /// <param name="order">Заказ для редактирования</param>
         public AddOrdersPage(Orders order)
         {
             InitializeComponent();
@@ -137,6 +141,10 @@ namespace JarBird.Pages
             }
         }
 
+        /// <summary>
+        /// Выполняет проверку корректности введенных данных заказа
+        /// </summary>
+        /// <returns>Возвращает true, если данные корректны, иначе false</returns>
         private bool ValidationData()
         {
             if (!int.TryParse(TextBoxQuantity.Text, out int quantity) || quantity <= 0)
