@@ -1,0 +1,45 @@
+﻿<Page x:Class="JarBird.Pages.AddOrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JarBird.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddOrdersPage">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock x:Name="IDOrdersTextBlock" Text="IDOrders"/>
+                <TextBlock Text="DeliveryAddress"/>
+                <TextBlock Text="IDUser" Margin="5,7,5,5"/>
+                <TextBlock Text="IDStatus" Margin="5,8,5,5"/>
+                <TextBlock Text="OrderDate" Margin="5,15,5,15"/>
+                <TextBlock Text="DeliveryDate" Margin="5,20,5,25"/>
+                <TextBlock Text="IDProduct" Margin="5,11,5,8"/>
+                <TextBlock Text="Quantity"/>
+                <TextBlock Text="PriceInOrder"/>
+                <TextBlock Text="LineTotal"/>
+                <Button x:Name="DelButton" Content="Удалить" VerticalAlignment="Bottom" Click="DelButton_Click"/>
+
+            </StackPanel>
+            <StackPanel>
+                <TextBlock x:Name="TextBoxIDOrders"/>
+                <TextBox x:Name="TextBoxDeliveryAddress"/>
+                <ComboBox x:Name="ComboBoxIDUser" DisplayMemberPath="FIO" Text="{Binding Users.FIO}" />
+                <ComboBox Name="ComboBoxIDStatus" DisplayMemberPath="StatusName" Text="{Binding Statuses.StatusName}"/>
+                <DatePicker x:Name="DatePickerOrderDate"/>
+                <TextBox x:Name="TextBoxOrderTime" Width="110" Text="00:00" Margin="5,0,0,0"/>
+                <DatePicker x:Name="DatePickerDeliveryDate"/>
+                <TextBox x:Name="TextBoxDeliveryTime" Width="110" Text="00:00" Margin="5,0,0,0"/>
+                <ComboBox x:Name="ComboBoxIDProduct" DisplayMemberPath="ProductName" Text="{Binding Products.ProductName}"/>
+                <TextBox x:Name="TextBoxQuantity"/>
+                <TextBlock x:Name="TextBoxPriceInOrder"/>
+                <TextBlock x:Name="TextBoxLineTotal"/>
+                <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Page>

@@ -27,10 +27,10 @@ namespace JarBird
         public string Composition { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<int> DiscountProcent { get; set; }
-        public Nullable<int> IsDiscountActive { get; set; }
+        public Nullable<bool> IsDiscountActive { get; set; }
         public Nullable<int> MinStock { get; set; }
         public Nullable<int> QuantityInStock { get; set; }
-        public string Image { get; set; }
+        public string ImagePath { get; set; }
     
         public virtual ICollection<Korzina> Korzina { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }

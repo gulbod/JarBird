@@ -13,10 +13,10 @@ namespace JarBird
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JarBirdEnitities : DbContext
+    public partial class JarBirdEntities : DbContext
     {
-        public JarBirdEnitities()
-            : base("name=JarBirdEnitities")
+        public JarBirdEntities()
+            : base("name=JarBirdEntities")
         {
         }
     

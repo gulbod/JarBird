@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:JarBird.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Меню" >
+      Title="Меню" IsVisibleChanged="Page_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,42 +14,125 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"/>
-        <ListBox x:Name="ListBoxProducts" Grid.Row="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock x:Name="FIOTextBlock" Grid.Row="0" HorizontalAlignment="Right"/>
+            <Button x:Name="AuthButton" Content="Авторизоваться" Height="40" Click="AuthButton_Click"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Продукция" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <StackPanel x:Name="SearchFiltersSortStackPahel" Orientation="Horizontal">
+                <TextBox x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged" MinWidth="60"/>
+                <ComboBox x:Name="PriceSortComboBox" 
+                          SelectedIndex="0"  
+                          SelectionChanged="PriceSortComboBox_SelectionChanged">
+                    <ComboBoxItem>Сортировка</ComboBoxItem>
+                    <ComboBoxItem>По возрастанию</ComboBoxItem>
+                    <ComboBoxItem>По убыванию</ComboBoxItem>
+                </ComboBox>
+                <ComboBox x:Name="ProductTypeComboBox" Width="200" SelectedIndex="0"
+                          DisplayMemberPath="ProductTypeName" SelectionChanged="ProductTypeComboBox_SelectionChanged"/>
+
+            </StackPanel>
+        </StackPanel>
+        <ListBox x:Name="ListBoxProducts" Grid.Row="1" 
+                 HorizontalContentAlignment="Stretch" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 SelectionChanged="ListBoxProducts_SelectionChanged">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="100*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <Border x:Name="ProductBorder" 
+                            BorderBrush="#E0E0E0" BorderThickness="1" 
+                            Margin="5" Padding="10" CornerRadius="5"
+                            Background="Transparent">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="100*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <TextBlock Text="{Binding ProductTypes.ProductTypeName}" Grid.Row="0" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding DiscountProcent}" HorizontalAlignment="Right"/>
-
-                        <TextBlock Text="{Binding ProductName}" Grid.Row="1"/>
-                        <TextBlock Text="{Binding Composition, StringFormat=Состав: {0}}" Grid.Row="2"/>
-                        <Image Grid.Row="3">
-                            <Image.Source>
-                                <Binding Path="Image">
-                                    <Binding.TargetNullValue>
-                                        <ImageSource>../images/picture.png</ImageSource>
-                                    </Binding.TargetNullValue>
-                                </Binding>
-                            </Image.Source>
-                        </Image>
-
-
-                    </Grid>
+                            <TextBlock Text="{Binding ProductTypes.ProductTypeName}" Grid.Row="0" HorizontalAlignment="Left"/>
+                            <Border x:Name="BorderDiscountText" BorderBrush="Orange" BorderThickness="1" Margin="5" Padding="10" CornerRadius="5" Background="Orange" Width="60" HorizontalAlignment="Right">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="False">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock x:Name="DiscountText" Text="{Binding DiscountProcent, StringFormat=- {0}%}" Grid.Row="0" HorizontalAlignment="Right">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="False">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                            <TextBlock Text="{Binding ProductName}" Grid.Row="1"/>
+                            <TextBlock Text="{Binding Composition, StringFormat=Состав: {0}}" Grid.Row="2"/>
+                            <Image Grid.Row="3" Width="200" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image.Source>
+                                    <Binding Path="ImagePath">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>../images/picture.png</ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                        
+                            <TextBlock Text="Cтоимость:" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="PriceTextBlock"  Text="{Binding Price, StringFormat={}{0}  ₽}" Grid.Row="4" HorizontalAlignment="Right" FontSize="24">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="#67BA80"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="True">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DiscountIsGreatThen10}" Value="True">
+                            <Setter Property="Background" Value="#BB5FCA"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
-        <StackPanel Grid.Row="2">
-
-        </StackPanel>
+        
+        <Button x:Name="AddProductButton" Content="Добавить продукцию" Grid.Row="2" HorizontalAlignment="Right" Click="AddProductButton_Click"/>
+        <Button x:Name="KorzinaButton" Content="Посмотреть корзину" Grid.Row="2" HorizontalAlignment="Right" Click="KorzinaButton_Click"/>
+        <Button x:Name="OrdersButton" Content="Посмотреть Заказы" Grid.Row="2" HorizontalAlignment="Left" Click="OrdersButton_Click"/>
 
 
     </Grid>

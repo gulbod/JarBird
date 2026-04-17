@@ -42,10 +42,10 @@
           <Property Name="Composition" Type="nvarchar" MaxLength="255" />
           <Property Name="Price" Type="float" />
           <Property Name="DiscountProcent" Type="int" />
-          <Property Name="IsDiscountActive" Type="int" />
+          <Property Name="IsDiscountActive" Type="bit" />
           <Property Name="MinStock" Type="int" />
           <Property Name="QuantityInStock" Type="int" />
-          <Property Name="Image" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ProductTypes">
           <Key>
@@ -258,10 +258,10 @@
           <Property Name="Composition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" />
           <Property Name="DiscountProcent" Type="Int32" />
-          <Property Name="IsDiscountActive" Type="Int32" />
+          <Property Name="IsDiscountActive" Type="Boolean" />
           <Property Name="MinStock" Type="Int32" />
           <Property Name="QuantityInStock" Type="Int32" />
-          <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Korzina" Relationship="Self.FK_Korzina_Products" FromRole="Products" ToRole="Korzina" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Products" FromRole="Products" ToRole="Orders" />
           <NavigationProperty Name="ProductTypes" Relationship="Self.FK_Products_ProductTypes" FromRole="Products" ToRole="ProductTypes" />
@@ -398,7 +398,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JarBirdEnitities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="JarBirdEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Korzina" EntityType="Self.Korzina" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Products" EntityType="Self.Products" />
@@ -441,7 +441,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище JarBirdModelContainer" CdmEntityContainer="JarBirdEnitities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище JarBirdModelContainer" CdmEntityContainer="JarBirdEntities">
           <EntitySetMapping Name="Korzina">
             <EntityTypeMapping TypeName="JarBirdModel.Korzina">
               <MappingFragment StoreEntitySet="Korzina">
@@ -483,7 +483,7 @@
                 <ScalarProperty Name="IsDiscountActive" ColumnName="IsDiscountActive" />
                 <ScalarProperty Name="MinStock" ColumnName="MinStock" />
                 <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
