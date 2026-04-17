@@ -28,9 +28,10 @@ namespace JarBird
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFrame.CanGoBack)
+            var MessageBoxResult = MessageBox.Show("Хотите выйти из системы?", "Выйти", MessageBoxButton.YesNo);
+            if (MessageBoxResult == MessageBoxResult.Yes)
             {
-                MainFrame.GoBack();
+                Application.Current.Shutdown();
             }
         }
     }

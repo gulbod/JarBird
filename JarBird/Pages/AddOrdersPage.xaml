@@ -40,6 +40,6 @@
                 <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>
             </StackPanel>
         </StackPanel>
-        
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click" Height="30"/>
     </Grid>
 </Page>

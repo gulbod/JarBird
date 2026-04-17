@@ -38,6 +38,11 @@ namespace JarBird.Pages
                 MessageBox.Show("Введите количество продукта");
                 return;
             }
+            if (Convert.ToInt32(QuantityTextBox.Text) <= 0)
+            {
+                MessageBox.Show("Количество продукта должно быть больше нуля");
+                return;
+            }
             CurrentOrder.IDUser = Core.AuthUser.IDUser;
             CurrentOrder.IDProduct = CurrentProduct.IDProduct;
             CurrentOrder.Quantity = Convert.ToInt32(QuantityTextBox.Text);

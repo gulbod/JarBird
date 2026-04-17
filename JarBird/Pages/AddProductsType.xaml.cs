@@ -69,24 +69,25 @@ namespace JarBird.Pages
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(ProductNameTextBox.Text)||
-               string.IsNullOrEmpty(DescriptionTextBox.Text) ||
-               string.IsNullOrEmpty(CompositionTextBox.Text) ||
-               string.IsNullOrEmpty(PriceTextBox.Text) ||
-               string.IsNullOrEmpty(DiscountProcentTextBox.Text) ||
-               string.IsNullOrEmpty(IsDiscountActiveTextBox.Text) ||
-               string.IsNullOrEmpty(MinStockTextBox.Text) ||
-               string.IsNullOrEmpty(QuantityInStockTextBox.Text) ||
+            if(string.IsNullOrWhiteSpace(PriceTextBox.Text) ||
+               string.IsNullOrWhiteSpace(DiscountProcentTextBox.Text) ||
+               string.IsNullOrWhiteSpace(IsDiscountActiveTextBox.Text) ||
+               string.IsNullOrWhiteSpace(MinStockTextBox.Text) ||
+               string.IsNullOrWhiteSpace(QuantityInStockTextBox.Text) ||
                IDProductTypeComboBox.SelectedIndex == -1)
             {
                 MessageBox.Show("Заполните все данные");
                 return;
             }
-            ValidationData();
+            if (ValidationData())
+            {
+                return;
+            }
             CurrentProduct.ProductName = ProductNameTextBox.Text;
             CurrentProduct.Description = DescriptionTextBox.Text;
             CurrentProduct.Composition = CompositionTextBox.Text;
-            CurrentProduct.Price = Convert.ToDouble(PriceTextBox.Text);
+
+            CurrentProduct.Price = Convert.ToDouble(PriceTextBox.Text.Replace('.', ','));
             CurrentProduct.DiscountProcent = Convert.ToInt32(DiscountProcentTextBox.Text);
             CurrentProduct.IsDiscountActive = Convert.ToBoolean(IsDiscountActiveTextBox.Text);
             CurrentProduct.MinStock = Convert.ToInt32(MinStockTextBox.Text);
@@ -98,9 +99,75 @@ namespace JarBird.Pages
             NavigationService.Navigate(new ProductsPage());
         }
 
-        private void ValidationData()
+        private bool ValidationData()
         {
+            string errorMessage = "";
 
+            string priceText = PriceTextBox.Text.Replace('.', ',');
+            if (double.TryParse(priceText, out double price))
+            {
+                if (price < 0)
+                    errorMessage += "Цена не может быть меньше нуля\n";
+            }
+            else
+            {
+                errorMessage += "Цена должна быть числом\n";
+            }
+            if (string.IsNullOrWhiteSpace(DiscountProcentTextBox.Text))
+            {
+                errorMessage += "Процент скидки не может быть пустым\n";
+            }
+            else
+            {
+                if (!int.TryParse(DiscountProcentTextBox.Text, out int discount) || discount < 0 || discount > 100)
+                    errorMessage += "Процент скидки должен быть числом от 0 до 100\n";
+            }
+
+            if (string.IsNullOrWhiteSpace(IsDiscountActiveTextBox.Text))
+            {
+                errorMessage += "Поле 'Скидка активна' не может быть пустым\n";
+            }
+            else
+            {
+                if (!bool.TryParse(IsDiscountActiveTextBox.Text, out _))
+                    errorMessage += "Поле 'Скидка активна' должно быть True или False\n";
+            }
+
+            if (string.IsNullOrWhiteSpace(MinStockTextBox.Text))
+            {
+                errorMessage += "Минимальный запас не может быть пустым\n";
+            }
+            else
+            {
+                if (!int.TryParse(MinStockTextBox.Text, out int minStock) || minStock < 0)
+                    errorMessage += "Минимальный запас должен быть положительным числом\n";
+            }
+
+            if (string.IsNullOrWhiteSpace(QuantityInStockTextBox.Text))
+            {
+                errorMessage += "Количество на складе не может быть пустым\n";
+            }
+            else
+            {
+                if (!int.TryParse(QuantityInStockTextBox.Text, out int quantity) || quantity < 0)
+                    errorMessage += "Количество на складе должно быть положительным числом\n";
+            }
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                MessageBox.Show("Обнаружены следующие ошибки:\n\n" + errorMessage,
+                                "Ошибка валидации",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return true; 
+            }
+
+            return false; 
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductsPage());
         }
     }
 }

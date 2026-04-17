@@ -42,5 +42,10 @@ namespace JarBird.Pages
         {
             NavigationService.Navigate(new AddOrdersPage());
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductsPage());
+        }
     }
 }

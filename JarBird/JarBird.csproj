@@ -195,6 +195,7 @@
     </EntityDeploy>
     <None Include="Documents\bd.bacpac" />
     <None Include="Documents\ERD.pdf" />
+    <None Include="Documents\import data.xlsx" />
     <None Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </None>

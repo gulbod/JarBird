@@ -40,5 +40,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="AllKorzinaButton" Content="Заказать всю корзину" Grid.Row="2" Click="AllKorzinaButton_Click"/>
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click"/>
     </Grid>
 </Page>

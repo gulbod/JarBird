@@ -46,7 +46,6 @@ namespace JarBird.Pages
                         OrdersButton.Visibility = Visibility.Collapsed;
                         break;
                     case 2:
-                        AddProductButton.Visibility = Visibility.Collapsed;
                         KorzinaButton.Visibility = Visibility.Collapsed;
                         break;
                     case 3:
@@ -121,10 +120,16 @@ namespace JarBird.Pages
 
         private void ListBoxProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ListBoxProducts.SelectedItem is Products SelectedProduct && Core.AuthUser.IDRole == 3 && Core.AuthUser.IDRole == 2) {
+            if (Core.AuthUser == null)
+            {
+                return;
+            }
+                
+            if (ListBoxProducts.SelectedItem is Products SelectedProduct && (Core.AuthUser.IDRole == 3 || Core.AuthUser.IDRole == 2)) 
+            {
                 NavigationService.Navigate(new AddProductsType(SelectedProduct));
             }
-            else if(ListBoxProducts.SelectedItem is Products SelectedProducts && Core.AuthUser.IDRole == 1)
+            if(ListBoxProducts.SelectedItem is Products SelectedProducts && Core.AuthUser.IDRole == 1)
             {
                 var MessageBoxResult = MessageBox.Show("Хотите ли добавить этот товар в корзину?", "Добавить", MessageBoxButton.YesNo);
                 if (MessageBoxResult == MessageBoxResult.Yes)
@@ -136,6 +141,7 @@ namespace JarBird.Pages
 
         private void AuthButton_Click(object sender, RoutedEventArgs e)
         {
+            Core.AuthUser = null;
             NavigationService.Navigate(new AuthPage());
         }
 
@@ -152,6 +158,12 @@ namespace JarBird.Pages
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new OrdersPage());
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Core.AuthUser = null;
+            NavigationService.Navigate(new AuthPage());
         }
     }
 }

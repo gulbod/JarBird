@@ -39,9 +39,13 @@ namespace JarBird.Pages
             }
             if (KorzinaListBox.SelectedItem is Korzina SelectedOrder)
             {
-                var MessageBoxResult = MessageBox.Show("Хотите оформить заказ?", "Оформить", MessageBoxButton.YesNo);
-                if (MessageBoxResult == MessageBoxResult.Yes)
+                var messageBoxResult = MessageBox.Show("Нажмите 'Да' чтобы оформить заказ\nНажмите 'Нет' чтобы удалить продукт из корзины\nНажмите 'Отмена' чтобы вернуться",
+                                      "Действие с корзиной",
+                                      MessageBoxButton.YesNoCancel);
+
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
+                    // Оформление заказа
                     var NewOrder = new Orders
                     {
                         DeliveryAddress = DeliveryAddressTextBox.Text,
@@ -59,6 +63,20 @@ namespace JarBird.Pages
                     Core.Context.SaveChanges();
                     MessageBox.Show("Заказ успешно создан");
                     LoadMyOrders();
+                }
+                else if (messageBoxResult == MessageBoxResult.No)
+                {
+                    // Удаление из корзины
+                    var confirmDelete = MessageBox.Show("Вы уверены, что хотите удалить продукт из корзины?",
+                                                        "Подтверждение удаления",
+                                                        MessageBoxButton.YesNo);
+                    if (confirmDelete == MessageBoxResult.Yes)
+                    {
+                        Core.Context.Korzina.Remove(SelectedOrder);
+                        Core.Context.SaveChanges();
+                        MessageBox.Show("Продукт удален из корзины");
+                        LoadMyOrders();
+                    }
                 }
             }
         }
@@ -115,6 +133,11 @@ namespace JarBird.Pages
             {
                 LoadMyOrders();
             }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductsPage());
         }
     }
 }

@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Меню" IsVisibleChanged="Page_IsVisibleChanged">
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -132,8 +132,8 @@
         
         <Button x:Name="AddProductButton" Content="Добавить продукцию" Grid.Row="2" HorizontalAlignment="Right" Click="AddProductButton_Click"/>
         <Button x:Name="KorzinaButton" Content="Посмотреть корзину" Grid.Row="2" HorizontalAlignment="Right" Click="KorzinaButton_Click"/>
-        <Button x:Name="OrdersButton" Content="Посмотреть Заказы" Grid.Row="2" HorizontalAlignment="Left" Click="OrdersButton_Click"/>
-
+        <Button x:Name="OrdersButton" Content="Посмотреть Заказы" Grid.Row="2" HorizontalAlignment="Center" Click="OrdersButton_Click"/>
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click"/>
 
     </Grid>
 </Page>

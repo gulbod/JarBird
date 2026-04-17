@@ -168,5 +168,10 @@ namespace JarBird.Pages
             }
             return true;
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
+        }
     }
 }

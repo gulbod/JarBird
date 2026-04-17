@@ -22,7 +22,7 @@
                 <TextBlock Text="MinStock"/>
                 <TextBlock Text="QuantityInStock"/>
                 <TextBlock Text="Image"/>
-                <Button x:Name="DelButton" Content="Удалить" VerticalAlignment="Bottom" Margin="0,55,0,0" Click="DelButton_Click"/>
+                <Button x:Name="DelButton" Content="Удалить" VerticalAlignment="Bottom" Margin="0,30,0,0" Click="DelButton_Click"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock x:Name="IDProductTextBlock" Text="{Binding IDProduct}"/>
@@ -30,7 +30,7 @@
                 <ComboBox x:Name="IDProductTypeComboBox" DisplayMemberPath="ProductTypeName" Text="{Binding ProductTypes.ProductTypeName}"/>
                 <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}"/>
                 <TextBox x:Name="CompositionTextBox" Text="{Binding Composition}"/>
-                <TextBox x:Name="PriceTextBox" Text="{Binding Price}"/>
+                <TextBox x:Name="PriceTextBox"/>
                 <TextBox x:Name="DiscountProcentTextBox" Text="{Binding DiscountProcent}"/>
                 <TextBox x:Name="IsDiscountActiveTextBox" Text="{Binding IsDiscountActive}"/>
                 <TextBox x:Name="MinStockTextBox" Text="{Binding MinStock}"/>
@@ -47,5 +47,7 @@
                 <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>
             </StackPanel>
         </StackPanel>
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click" Height="30"/>
+
     </Grid>
 </Page>

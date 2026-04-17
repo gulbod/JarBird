@@ -38,5 +38,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="AddOrderButton" Content="Добавить заказ" Grid.Row="2" Click="AddOrderButton_Click"/>
+        <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click"/>
     </Grid>
 </Page>

@@ -12,8 +12,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Background="#F4E8D3" Margin="0"/>
-        <Image Source="/image/IconVe.png" HorizontalAlignment="Left"/>
-        <Button x:Name="Back" Content="Назад" HorizontalAlignment="Right" Click="Back_Click"/>
+        <Image Source="/images/IconVe.png" Grid.Row="0" HorizontalAlignment="Left"/>
+        <Button x:Name="Back" Content="Выход" HorizontalAlignment="Right" Click="Back_Click"/>
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
