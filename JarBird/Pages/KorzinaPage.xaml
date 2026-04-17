@@ -21,23 +21,31 @@
             <TextBox x:Name="DeliveryAddressTextBox" Width="100"/>
         </StackPanel>
         <ListBox Grid.Row="1" x:Name="KorzinaListBox" SelectionChanged="KorzinaListBox_SelectionChanged">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="IDProduct" Text="{Binding Products.ProductName}" Grid.Column="0"/>
-                        <StackPanel Orientation="Horizontal" Grid.Column="1">
-                            <TextBlock x:Name="Quantity" Text="{Binding Quantity}"/>
-                            <TextBlock x:Name="PriceInOrder" Text="{Binding PriceInOrder, StringFormat={}{0}  ₽}"/>
-                        </StackPanel>
-                        <TextBlock x:Name="LineTotal" Text="{Binding LineTotal, StringFormat={}{0}  ₽}" Grid.Column="2"/>
-                    </Grid>
+                    <Border BorderBrush="#e0e0e0" BorderThickness="1" CornerRadius="5" Margin="5" Background="Transparent">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="IDProduct" Text="{Binding Products.ProductName}" Grid.Column="0"/>
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <TextBlock x:Name="Quantity" Text="{Binding Quantity}"/>
+                                <TextBlock x:Name="PriceInOrder" Text="{Binding PriceInOrder, StringFormat={}{0}  ₽}"/>
+                            </StackPanel>
+                            <TextBlock x:Name="LineTotal" Text="{Binding LineTotal, StringFormat={}{0}  ₽}" Grid.Column="2"/>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
         </ListBox>
         <Button x:Name="AllKorzinaButton" Content="Заказать всю корзину" Grid.Row="2" Click="AllKorzinaButton_Click"/>
         <Button x:Name="BackButton" Content="Назад" Grid.Row="2" HorizontalAlignment="Left" Click="BackButton_Click"/>

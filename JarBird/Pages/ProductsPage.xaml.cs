@@ -26,7 +26,7 @@ namespace JarBird.Pages
             ListBoxProducts.ItemsSource = Core.Context.Products.ToList();
 
             var ProductsTypes = Core.Context.ProductTypes.ToList();
-            ProductsTypes.Insert(0, new ProductTypes { ProductTypeName = "Все типы продукции" });
+            ProductsTypes.Insert(0, new ProductTypes {ProductTypeName = "Все типы продукции"});
 
             ProductTypeComboBox.ItemsSource = ProductsTypes;
             if (Core.AuthUser == null)
@@ -84,40 +84,33 @@ namespace JarBird.Pages
         /// </summary>
         private void Filter()
         {
-            try
+            var filteredProducts = Core.Context.Products.ToList();
+
+            if (!string.IsNullOrWhiteSpace(SearchTextBox?.Text))
             {
-                var filteredProducts = Core.Context.Products.ToList();
-
-                if (!string.IsNullOrWhiteSpace(SearchTextBox?.Text))
-                {
-                    filteredProducts = filteredProducts
-                        .Where(p => p.ProductName.ToLower().Contains(SearchTextBox.Text.ToLower()))
-                    .ToList();
-                }
-                if (PriceSortComboBox.SelectedIndex == 1)
-                {
-                    filteredProducts = filteredProducts.OrderBy(p => p.Price).ToList();
-                }
-                else if (PriceSortComboBox.SelectedIndex == 2)
-                {
-                    filteredProducts = filteredProducts.OrderByDescending(p => p.Price).ToList();
-                }
-
-                if (ProductTypeComboBox != null && ProductTypeComboBox.SelectedIndex != 0)
-                {
-                    filteredProducts = filteredProducts
-                        .Where(p => p.ProductTypes == ProductTypeComboBox.SelectedItem as ProductTypes)
-                        .ToList();
-                }
-
-                if (ListBoxProducts != null)
-                {
-                    ListBoxProducts.ItemsSource = filteredProducts;
-                }
+                filteredProducts = filteredProducts
+                    .Where(p => p.ProductName.ToLower().Contains(SearchTextBox.Text.ToLower()))
+                .ToList();
             }
-            catch (Exception ex)
+            if (PriceSortComboBox.SelectedIndex == 1)
             {
-                MessageBox.Show($"Ошибка при фильтрации данных: {ex.Message}");
+                filteredProducts = filteredProducts.OrderBy(p => p.Price).ToList();
+            }
+            else if (PriceSortComboBox.SelectedIndex == 2)
+            {
+                filteredProducts = filteredProducts.OrderByDescending(p => p.Price).ToList();
+            }
+
+            if (ProductTypeComboBox != null && ProductTypeComboBox.SelectedIndex != 0)
+            {
+                filteredProducts = filteredProducts
+                    .Where(p => p.ProductTypes == ProductTypeComboBox.SelectedItem as ProductTypes)
+                    .ToList();
+            }
+
+            if (ListBoxProducts != null)
+            {
+                ListBoxProducts.ItemsSource = filteredProducts;
             }
         }
 

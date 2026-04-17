@@ -85,15 +85,15 @@ namespace JarBird.Pages
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TextBoxDeliveryAddress.Text) ||
+            if (string.IsNullOrWhiteSpace(TextBoxDeliveryAddress.Text) ||
                 ComboBoxIDUser.SelectedIndex == -1 ||
                 ComboBoxIDStatus.SelectedIndex == -1 ||
                 DatePickerOrderDate.SelectedDate == null ||
-                string.IsNullOrEmpty(TextBoxOrderTime.Text) ||
+                string.IsNullOrWhiteSpace(TextBoxOrderTime.Text) ||
                 DatePickerDeliveryDate.SelectedDate == null ||
-                string.IsNullOrEmpty(TextBoxDeliveryTime.Text) ||
+                string.IsNullOrWhiteSpace(TextBoxDeliveryTime.Text) ||
                 ComboBoxIDProduct.SelectedIndex == -1 ||
-                string.IsNullOrEmpty(TextBoxQuantity.Text))
+                string.IsNullOrWhiteSpace(TextBoxQuantity.Text))
             {
                 MessageBox.Show("Заполните все данные");
                 return;
@@ -153,6 +153,7 @@ namespace JarBird.Pages
                 return false;
             }
 
+            
             if (!TimeSpan.TryParse(TextBoxOrderTime.Text, out TimeSpan orderTime))
             {
                

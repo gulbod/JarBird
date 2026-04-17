@@ -86,7 +86,7 @@ namespace JarBird.Pages
 
         private void AllKorzinaButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(DeliveryAddressTextBox.Text))
+            if (string.IsNullOrWhiteSpace(DeliveryAddressTextBox.Text))
             {
                 MessageBox.Show("Укажите адрес доставки");
                 return;
