@@ -24,11 +24,15 @@ namespace JarBird.Pages
         {
             InitializeComponent();
             OrdersListBox.ItemsSource = Core.Context.Orders.ToList();
+            if(Core.AuthUser.IDRole != 3)
+            {
+                AddOrderButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void OrdersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (OrdersListBox.SelectedItem is Orders selectedOrders)
+            if (OrdersListBox.SelectedItem is Orders selectedOrders && Core.AuthUser.IDRole == 3)
             {
                 NavigationService.Navigate(new AddOrdersPage(selectedOrders));
             }
